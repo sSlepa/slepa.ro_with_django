@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Materiale{% endblock %}
+
+{% block content %}
+
+	<div class="content">
+	<h1 style="margin-top: 5px;">Disjoint Set Union (DSU)</h1>
+
+<hr>
+
+<h2>Ce este Disjoint Set Union?</h2>
+<ul>
+<li>Disjoint Set Union (DSU), cunoscut și sub numele de Union-Find, este o structură de date care gestionează mulțimi disjuncte.</li>
+<li>Este utilizată pentru a răspunde rapid la întrebări legate de apartenența elementelor la aceeași mulțime.</li>
+<li>Operațiile principale sunt:</li>
+    <ul>
+        <li><b>Find(x):</b> Găsește reprezentantul mulțimii care conține elementul <code>x</code>.</li>
+        <li><b>Union(x, y):</b> Unește mulțimile disjuncte care conțin <code>x</code> și <code>y</code>.</li>
+    </ul>
+<li>Două tehnici principale optimizează performanța:</li>
+    <ul>
+        <li><b>Path Compression:</b> Aplatizează structura arborelui pentru a accelera operația <code>Find</code>.</li>
+        <li><b>Union by Rank/Size:</b> Atașează arborele mai mic la cel mai mare.</li>
+    </ul>
+<li>Complexitatea operațiilor este <code>O(&alpha;(n))</code>, unde <code>&alpha;(n)</code> este inversa funcției Ackermann, considerată constantă în aplicațiile practice.</li>
+</ul>
+
+<hr>
+
+<h2>Implementare în C++</h2>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+class DSU {
+private:
+    vector&lt;int&gt; parent, rank;
+
+public:
+    DSU(int n) {
+        parent.resize(n + 1);
+        rank.resize(n + 1, 0);
+        for (int i = 0; i &lt;= n; ++i) {
+            parent[i] = i;
+        }
+    }
+
+    int Find(int x) {
+        if (parent[x] != x) {
+            parent[x] = Find(parent[x]); // Path Compression
+        }
+        return parent[x];
+    }
+
+    void Union(int x, int y) {
+        int rootX = Find(x);
+        int rootY = Find(y);
+
+        if (rootX != rootY) {
+            if (rank[rootX] &lt; rank[rootY]) {
+                parent[rootX] = rootY;
+            } else if (rank[rootX] &gt; rank[rootY]) {
+                parent[rootY] = rootX;
+            } else {
+                parent[rootY] = rootX;
+                rank[rootX]++;
+            }
+        }
+    }
+};
+
+int main() {
+    int n = 5; // Numărul de elemente
+    DSU dsu(n);
+
+    dsu.Union(1, 2);
+    dsu.Union(3, 4);
+    dsu.Union(2, 3);
+
+    cout &lt;&lt; (dsu.Find(1) == dsu.Find(4) ? "Aceeași mulțime" : "Mulțimi diferite") &lt;&lt; endl;
+    cout &lt;&lt; (dsu.Find(1) == dsu.Find(5) ? "Aceeași mulțime" : "Mulțimi diferite") &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+
+<hr>
+
+<h2>Aplicații Practice</h2>
+<ul>
+<li>DSU este utilizat frecvent în probleme precum:</li>
+    <ul>
+        <li>Găsirea componentelor conexe în grafuri.</li>
+        <li>Detectarea ciclurilor în grafuri nedirecționate.</li>
+        <li>Construirea arborelui de acoperire minimă (algoritmul Kruskal).</li>
+        <li>Gestionarea rețelelor de prietenii.</li>
+    </ul>
+<li>Probleme clasice care implică DSU:</li>
+    <ul>
+        <li><a href="https://cses.fi/problemset/task/1676/" target="_blank">Connecting Cities</a></li>
+        <li><a href="https://cses.fi/problemset/task/1675/" target="_blank">Road Construction</a></li>
+        <li><a href="https://www.pbinfo.ro/probleme/3763" target="_blank">Friend Network</a></li>
+        <li><a href="https://codeforces.com/problemset/problem/1374/C" target="_blank">Small to Large Merging</a></li>
+    </ul>
+</ul>
+
+<hr>
+
+<style>
+    a{
+        display : inline-block;
+        font-size: 18px;
+        text-decoration: underline;
+        color: black;
+    }
+</style>
+
+<h2>Aspecte Avansate</h2>
+<ul>
+<li><b>DSU cu mărime:</b> O alternativă la folosirea rangului, care determină liderul în funcție de mărimea mulțimii.</li>
+<li><b>Persistent DSU:</b> Permite păstrarea versiunilor anterioare ale structurii pentru a răspunde la întrebări offline.</li>
+</ul>
+
+<hr>
+
+<h2>Resurse Suplimentare</h2>
+<ul>
+<li><a href="https://cp-algorithms.com/data_structures/disjoint_set_union.html" target="_blank">CP-Algorithms: Disjoint Set Union</a></li>
+<li><a href="https://www.youtube.com/playlist?list=PLl0KD3g-oDOGJUdmhFk19LaPgrfmAGQfo" target="_blank">Tutoriale video despre DSU</a></li>
+<li><a href="https://codeforces.com/problemset" target="_blank">Probleme pe Codeforces</a></li>
+</ul>
+
+<hr>
+
+<h2 style="font: 50px;">Materialul este încă în lucru. Pentru sugestii și greșeli observate, verificați tab-ul de contact.</h2><br>
+
+{% endblock %}
