@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Materiale{% endblock %}
+
+{% block content %}
+<div class="main_content_links">
+
+    <style>
+        a {
+            display: inline-block;
+            font-size: 18px;
+            text-decoration: underline;
+            color: black;
+        }
+    </style>
+
+    <a href="{% url 'string_page' %}">String</a><br>
+    <a href="{% url 'stl_page' %}">STL - Standard Template Library</a><br>
+    <a href="{% url 'grafuri_arbori_page' %}">Grafuri si Arbori</a><br>
+    <a href="{% url 'structuri_avansate_page' %}">Structuri de date avansate</a><br>
+    <a href="{% url 'concursuri_page' %}">Algoritmi pentru concursuri</a><br>
+    <a href="{% url 'archive_page' %}">Arhiva personală cu probleme de concurs</a><br>
+    <a href="{% url 'measure_time_page' %}">Cum măsori timpul de execuție al unui program în C++?</a><br>
+    <hr>
+    <h1>Materiale lipsă momentan 😭</h1>
+    <a href="#">Diverse</a><br>
+    <a href="#">Clase (OOP)</a><br>
+    <a href="#">Programare dinamică</a><br>
+
+</div>
+
+<footer>
+    <div class="left-content">
+        <p>Website under development</p>
+        <p>Copyright© 2024 Gaspar Andrei</p>
+    </div>
+</footer>
+{% endblock %}

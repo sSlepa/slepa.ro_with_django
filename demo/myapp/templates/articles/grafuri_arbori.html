@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Grafuri și Arbori{% endblock %}
+
+{% block content %}
+<h1 id="curs-stl" style="margin-top: 5px;">Grafuri și Arbori</h1>
+
+<hr>
+
+<div>
+    <style>
+        a{
+            display : inline-block;
+            font-size: 20px;
+            text-decoration: underline;
+            color: black;
+            
+        }
+    </style>
+
+    <!-- Linkuri către subpagini -->
+    <a href="{% static 'grafuri/graphs.html' %}">Grafuri</a><br>
+    <a href="{% static 'grafuri/arbori.html' %}">Arbori</a><br>
+</div>
+
+<hr>
+
+<footer>
+    <div class="left-content">
+        <p>Website under development</p>
+        <p>Copyright© 2024 Gaspar Andrei</p>
+    </div>
+</footer>
+{% endblock %}

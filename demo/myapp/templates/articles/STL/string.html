@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block title %}String C++{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1 id="curs-stl" style="margin-top: 5px;">String C++</h1>
+    <hr>
+    <h2 id="ce-este-stl">Ce este un string?</h2>
+    <ul>
+        <li>În limbajul de programare C++, manipularea șirurilor de caractere (stringuri) este o parte esențială a programării,
+            iar acest limbaj oferă mai multe modalități de a lucra cu ele. C++ include atât manipularea șirurilor de caractere în stil C
+            (<code>char a[100];</code>),
+            cât și o clasă dedicată stringurilor, oferind flexibilitate și funcționalitate îmbunătățită.(<code>string a;</code>)
+        </li>
+        <li>Acest articol acoperă doar clasa <code>std::string</code> din C++.</li>
+        <li>
+            <code>
+                #include &lt;iostream&gt;<br>
+                #include &lt;string&gt;<br>
+                int main() {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;std::string Primul_string = "Salut";<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;std::cout << Primul_string;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br>
+                }
+            </code>
+        </li>
+    </ul>
+    <li>Pentru a usura scrierea în continuare, vom folosi <code>using namespace std</code> definit înainte de funcția main.</li>
+    <hr>
+
+    <h2 id="de-ce">La ce ne ajută string-urile?</h2>
+    <ul>
+        <li>În primul rând, C++ introduce o modalitate mult mai puternică și mai flexibilă pentru a lucra cu stringuri: <code>
+                clasa std::string</code></li>
+        <li>C++ oferă o gamă largă de funcții pentru manipularea și gestionarea lor</li>
+        <li>Nu mai trebuie să pierdem timp pe implementarea structurilor de date
+            și nu mai e nevoie să te preocupi de dimensiunea tablourilor sau de manipularea manuală a memoriei.</li>
+        <li>Le putem "lipi" mult mai usor. Scriind operația următoare lipim pe "b" la "a" : <br><code>string a,b;</code><br> <code>a = a + b</code>
+        </li>
+        <li>Simplifică mult viața basically.</li>
+    </ul>
+    <hr>
+    <h2 id="cateva_functii">Câteva funcții utile</h2>
+    <h3 style="font-size: 16px;display: inline-block;">Funcțiile se apelează cu "nume_string"</h3>
+    <h3 style="font-size: 30px;display: inline-block;">.</h3>
+    <h3 style="font-size: 16px;display: inline-block;">"nume_functie(parametrii)" adică :
+        <code>un_string_random.functie_predefinita(parametrii);</code>
+    </h3>
+    <ul>
+        <li>Funcția <code>size()</code> sau <code>length()</code> ce returnează lungimea string-ului<br></li>
+        <li>Funcția <code>substr(pos,len)</code> ce extrage dintr-un string, un substring ce începe la poziția <code>pos</code>
+            și are lungime <code>len</code>.</li>
+        <li>Funcția <code>clear()</code> ce golește memoria din string acesta devenind gol.</li>
+        <li>Funcția <code>empty()</code> testează dacă un string este gol, returnând o valoare de tip <code>boolean</code>.</li>
+        <li>Putem accesa orice poziție din string folosind operatorul <code>[]</code> : <br><code>string a = "Salut"</code><br>
+            <code>cout << a[3];</code><br>
+            output : u</li>
+        <li>Funcția <code>push_back(caracter)</code> ce adaugă la final un caracter și <code>pop_back()</code>
+            ce șterge de la final un caracter.</li>
+        <li>Operatorul "==" este supraîncărcat pentru clasa string deci se poate efectua direct comparația între 2 string-uri :
+            <code>cout << (a == b)</code>. Se returnează <code>0</code> sau <code>1</code>.</li>
+        <li>Funcția <code>insert(pos,string)</code> ce inserează după poziția <code>pos</code> alt string și <code>erase(pos,len)</code>
+            ce șterge <code>len</code> caractere după poziția <code>pos</code>.</li>
+        <li>String-urile din C++ dispun și de iteratori de parcurgere. Avem <code>begin()</code> ce pointează spre începutul string-ului
+            și <code>end()</code> ce pointează spre final <br>
+            Exemple de parcurgeri : <br>
+            <h2 style="color: #a846b9;font-size: 16px;">1) Cu iterator :<br></h2>
+            <code>string a = "salutare";<br>
+                for(string::iterator i = a.begin(); i != a.end() ; ++i)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;cout << *i;</code>
+            <br><br>
+            <h2 style="color: #a846b9;font-size: 16px;">2) Folosind cuvântul cheie <code>"auto"</code> care preia tipul de date automat :
+                <br></h2>
+            <code>string a = "salutare;<br>
+                for(auto i : a)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;cout << i;<br></code><br>
+
+            <h2 style="color: #a846b9;font-size: 16px;">3) Parcurgere standard :<br></h2>
+            <code>string a = "salutare;<br>
+                for(int i = 0 ; i < a.size() ; ++i)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;cout << a[i];<br></code>
+        </li>
+    </ul>
+
+    <hr>
+    <h2 class="Advanced">Materiale avansate</h2>
+    <h1 style="display: inline-block;font-size: 15px;">1)</h1> String Hashing - <a href="https://cp-algorithms.com/string/string-hashing.html"
+        style="color: black;" target="_blank">Material Extern</a>
+    <ul>
+        <li>Hash-urile ne ajută să comparăm în timp constant 2 string-uri O(1);</li>
+        <li>Ideea este una simplă, aceea că transformăm fiecare string într-un număr iar apoi acele 2 numere se compară instant.</li>
+		<li>Hashing-ul are aplicații în criptografie, securitate cibernetică dar și în programarea competitivă, deoarece 
+			ajută la timpul de execuție al programelor.</li>
+		<li>Un exemplu de formulă prin care "hash-uim" un string : <br></li>
+		<code style="font-size: 17px;color: #2e00c9;">Hash(a) = (a[0] + a[1] &bull; p + a[2] &bull; p<sup>2</sup> + 
+			... + a[a.size() - 1] &bull; p<sup>a.size() - 1</sup>) % MOD</code>
+		<li>P este de obicei un număr prim (31, 59, etc.), MOD și el la rândul lui un număr prim foarte mare, de exemplu <code>1000000007</code> sau <code>984162946217979097</code> 
+			(Depinde de cerința problemei)</li>
+		<li>Exemplu de implementare a unei funcții de hashing in C++ :<br>
+			<code style="color: #2e00c9;">long long compute_hash(string const& s) { <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;const int p = 31;<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;const int m = 1e9 + 9;<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;long long hash_value = 0;<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;long long p_pow = 1;<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;for (char c : s) {<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash_value = (hash_value + (c - 'a' + 1) * p_pow) % m;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p_pow = (p_pow * p) % m;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;return hash_value;<br>
+			}</code>
+		
+		</li>
+		</ul>
+		
+		<hr>
+		
+		<h1 style="display: inline-block;font-size: 15px;">2)</h1> String Matching - <a href="https://cp-algorithms.com/string/rabin-karp.html" 
+			style="color: black;" target="_blank">Material Extern</a>
+		
+		</div>
+		
+		<hr>
+		<h2 style="font: 50px;">Materialul este încă in lucru. Pentru sugestii și greșeli observate verificați tab-ul de contact. </h2><br>
+    </ul>
+</div>
+
+{% endblock %}

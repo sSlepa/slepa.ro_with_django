@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Algoritmi pentru Concursuri{% endblock %}
+
+{% block content %}
+<h1 id="curs-stl" style="margin-top: 5px;">Algoritmi pentru Concursuri</h1>
+
+<hr>
+
+<div>
+    <style>
+        a {
+            display: inline-block;
+            font-size: 20px;
+            text-decoration: underline;
+            color: black;
+            
+        }
+    </style>
+
+    <!-- Linkuri către algoritmi -->
+    <a href="{% static 'algo_concurs/lee.html' %}">Algoritmul lui Lee</a><br>
+    <a href="{% static 'algo_concurs/dijkstra.html' %}">Algoritmul lui Dijkstra</a><br>
+    <a href="{% static 'algo_concurs/kruskal.html' %}">Algoritmul lui Kruskal</a><br>
+</div>
+
+<hr>
+
+<footer>
+    <div class="left-content">
+        <p>Website under development</p>
+        <p>Copyright© 2024 Gaspar Andrei</p>
+    </div>
+</footer>
+{% endblock %}

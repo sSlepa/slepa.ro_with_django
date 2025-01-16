@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Materiale STL{% endblock %}
+
+{% block content %}
+<div class="main_content_links">
+    <h1>Materiale din STL (Standard Template Library)</h1>
+    <hr>
+    <style>
+        a{
+            display: block;
+            font-size: 20px;
+            text-decoration: underline;
+            color: black;
+            
+        }
+    </style>
+    <!-- Linkuri către paginile STL -->
+	<a href="{% url 'pair_tuple_page' %}">Pair & Tuple</a>
+	<a href="{% url 'vector_page' %}">Vector</a>
+    <a href="{% url 'queue_page' %}">Queue</a>
+	<a href="{% url 'stack_page' %}">Stack</a>
+    <a href="{% url 'map_page' %}">Map</a>
+    <a href="{% url 'set_page' %}">Set</a>
+    <a href="{% url 'diverse_stl_page' %}">Diverse STL</a>
+
+    <hr>
+
+   
+</div>
+{% endblock %}

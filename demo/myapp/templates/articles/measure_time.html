@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Execution Time in C++{% endblock %}
+
+{% block content %}
+<div>
+    <h2>Execution time în C++ - 
+        <a href="https://github.com/sSlepa/Invers-Hash-si-altele/blob/main/CPU_Clock.cpp" 
+           target="_blank" style="color: black;">Github</a>
+    </h2>
+    <hr>
+
+    <h2>La ce ne ajută să știm timpul de execuție?</h2>
+    <ul>
+        <li>Putem crea o statistică a timpilor de execuție a unor algoritmi ce execută același task (de exemplu sortarea unui vector).</li>
+        <li>Putem verifica diferența dintre timpul necesar pentru a rezolva problema și timpul curent al programului.</li>
+        <li>Există și alte moduri de a măsura timpul - 
+            <a href="https://www.geeksforgeeks.org/measure-execution-time-function-cpp/" 
+               target="_blank" style="color: black;">Metodă alternativă</a>
+        </li>
+    </ul>
+
+    <div class="cod_timp">
+        <pre style="font-size: 14px; background: #f8f9fa; padding: 10px; border-radius: 5px;">
+#include &lt;iostream&gt;
+#include &lt;Windows.h&gt;
+using namespace std;
+
+static inline int64_t GetTicks() {
+    LARGE_INTEGER ticks;
+    if (!QueryPerformanceCounter(&ticks)) {
+        // Handle error (you can throw an exception or handle it differently)
+    }
+    return ticks.QuadPart;
+}
+
+int main() {
+    int64_t start = GetTicks();
+
+    /// Aici pui algoritmul / apelul subprogramului pentru care contorizezi timpul
+
+    int64_t end = GetTicks();
+
+    double elapsedTimeSeconds = (double)(end - start);
+
+    cout << "Elapsed time: " << fixed << setprecision(3) << elapsedTimeSeconds / 1e7 << " seconds";
+
+    return 0;
+}
+        </pre>
+    </div>
+</div>
+{% endblock %}

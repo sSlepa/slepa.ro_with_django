@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Structuri de Date Avansate{% endblock %}
+
+{% block content %}
+<h1 id="curs-stl" style="margin-top: 5px;">Structuri de Date Avansate</h1>
+
+<hr>
+
+<div>
+    <style>
+		a{
+            display : inline-block;
+            font-size: 20px;
+            text-decoration: underline;
+            color: black;
+            
+        }
+    </style>
+
+    <!-- Linkuri către subpagini -->
+    <a href="{% url 'aib_page' %}">Arbori Indexați Binar</a><br>
+    <a href="{% static 'sda/aint.html' %}">Arbori de Intervale</a><br>
+    <a href="{% static 'sda/red_black.html' %}">Arbori Red-Black</a><br>
+    <a href="{% static 'sda/dsu.html' %}">Disjoint Set Union</a><br>
+    <a href="{% static 'sda/heap.html' %}">Heaps</a><br>
+    <a href="{% static 'sda/trie.html' %}">Trie</a><br>
+    <a href="{% static 'sda/avl.html' %}">Arbori AVL</a><br>
+    <a href="{% static 'sda/splay.html' %}">Splay Tree</a><br>
+</div>
+
+<hr>
+
+<footer>
+    <div class="left-content">
+        <p>Website under development</p>
+        <p>Copyright© 2024 Gaspar Andrei</p>
+    </div>
+</footer>
+{% endblock %}

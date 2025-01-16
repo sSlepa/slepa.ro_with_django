@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Materiale STL{% endblock %}
+
+{% block content %}
+
+
+
+<div class = "content">
+	<h1 style="margin-top: 5px;">STL Stack</h1>
+
+<hr>
+
+<h2>Ce este un Stack din STL ?</h2>
+<ul>
+<li>Stack-ul din STL este o structură de date liniară de tip FILO (First In Last Out) care permite operația de 
+    introducere de date pe la un capăt si operația de stergere a datelor la același capăt.</li>
+<li>Acesta se declară astfel : <code>stack&lttip_data&gt nume_stivă;</code></li>
+<li>Este necesară <code>#include &ltstack&gt</code> pentru a putea utiliza structura de date si metodele sale.</li>
+    
+</ul>
+
+<hr>
+<h2>Operații și funcții aplicate pe Stack</h2>
+<ul>
+
+    <li><code>nume_stivă.push(variabila)</code> Adaugă la finalul stivei variabila introdusă intre paranteze.</li>
+    <li><code>nume_stivă.pop()</code> Sterge ultimul element adăugat(de la final / dreapta daca privim structura liniar).</li>
+    <li><code>nume_stivă.size()</code> Returnează numărul de elemente.</li>
+    <li><code>nume_stivă.top()</code> Furninează valorea din varful stivă.</li>
+    <li><code>nume_stivă.clear()</code> Elimină toate elementele din stivă.</li>
+    <li><code>nume_stivă.empty()</code> Verifică dacă stiva este goală. Returnează <code>true</code> 
+		dacă stiva este goală, altfel <code>false</code>.</li>
+
+</ul>
+
+<hr>
+
+<h1>Din păcate, parcurgerea se poate realiza intr-un singur mod : <br></h1>
+	<code>stack&ltint&gt s;<br> 
+			for(int i = 0 ; i < 5 ; ++i)///Pentru a usura adaugam primele 5 numere in vector<br> 
+			&nbsp;&nbsp;&nbsp;&nbsp;s.push(i);<br>
+            <br>
+			while(!s.empty()){<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;cout << s.top() << ' ';<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;s.pop();<br>
+            }<br>
+		</code>
+
+<hr>
+
+<h1>Unde putem aplica aceste stive ?</h1>
+
+<ul>
+    <li>Problema gestionării vagoanelor de tren.</li>
+    <li>Sortarea topologică.</li>
+    <li>Ajută la găsirea componentelor tari conexe (Algoritmul lui Kosaraju).</li>
+    <li>Analiza amortizată (Nivel de națională).</li>
+    <li>De obicei problemele ce implică stiva sunt grele.</li>
+    <li>Recomand să vă bateți capul cu cele ușore si medii de pe pbinfo pentru a înțelege conceptele de bază iar apoi să consultați materialul 
+        de concurs de pe site și pagina cu <a href="../usefull_websites" target="_blank" style="color: black;">
+            <b>Usefull Websites</b> </a>unde puteți găsi material suplimentar.</li>
+    <li style="font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: 18px;"><b>Majoritatea celor amintite mai sus vor 
+                fi parcurse in materialul "Algoritmi pentru concurs".</b></li>
+    <li><a href=" https://www.pbinfo.ro/probleme/categorii/86/structuri-de-date-liniare-stiva" target="_blank" 
+        style="color: black;">Pbinfo stivă</a></li>
+       
+</ul>
+
+</div>
+
+<hr>
+
+<h2 style="font: 50px;">Materialul este încă in lucru. Pentru sugestii și greșeli observate verificați tab-ul de contact. </h2><br>
+
+{% endblock %}

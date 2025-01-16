@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Materiale STL{% endblock %}
+
+{% block content %}
+
+
+
+
+	<div class = "content">
+	<h1 style="margin-top: 5px;">STL Map</h1>
+
+<hr>
+
+<h2>Ce este un Map din STL ?</h2>
+<ul>
+<li>În C++ Standard Template Library (STL), containerul <code>std::map</code> este un tip de structură de date asociativă 
+    ce permite stocarea perechilor cheie-valoare. Fiecare cheie este unică, iar valorile asociate acestor 
+    chei pot fi accesate, adăugate sau modificate rapid. Elementele dintr-un std::map sunt stocate ordonat, 
+    conform ordinii definite de chei, care utilizează, implicit, operatorul <code>operator&lt</code> pentru a compara elementele.
+     std::map este implementat folosind o structură de arbore binar echilibrat (de obicei, un arbore AVL sau Red-Black), 
+     ceea ce asigură că operațiile de inserare, ștergere și căutare au complexitate logaritmică O(log n). </li>
+<li>Acesta se declară astfel : <code>map&lttip_data,tip_data&gt nume_map;</code></li>
+<li>Este necesară <code>#include &ltmap&gt</code> pentru a putea utiliza structura de date si metodele sale.</li>
+    
+</ul>
+
+<hr>
+<h2>Operații și funcții aplicate pe Map</h2>
+<ul>
+
+    <li><code>nume_map[nume_tip_data_1] = nume_tip_data_2</code> Atribuie la cheia cu identificatorul <code>nume_tip_data_1(cheia)</code>
+    variabila <code>nume_tip_data_2(valoarea)</code> (Relație cheie-valoare).</li>
+    <li><code>nume_map.erase(nume_cheie)</code> Șterge perechea cheie-valoara.</li>
+    <li><code>nume_map.find(nume_cheie)</code> Caută perechea cheie-valoare dupa cheia transmisă ca parametru : <br>
+    <code>auto it = nume_map.find(nume_cheie);<br>
+        if(it != nume_map.end()){ /// Daca este egal cu iteratorul <code>end</code> atunci se află in afara structurii.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;cout << "Cheia există și valoarea este: " << it->second; 
+            /// Afisăm valoarea corespunzatoare cheii<br> 
+        }<br>
+        </code></li>
+    <li><code>nume_map.size()</code> Returnează dimensiunea structurii de date(In principiu, numărul de perechi cheie-valoare atribuite).</li>
+    <li><code>nume_map.empty()</code> Returnează dacă structura de date este goală sau nu.</li>
+</ul>
+
+<hr>
+
+<h1>Metode de parcurgere : <br></h1>
+<h2 style="color: #a846b9;font-size: 16px;">1) Cu iterator :<br></h2>
+	<code>map&ltint,int&gt m;<br> 
+			for(int i = 0 ; i < 5 ; ++i)<br> 
+			&nbsp;&nbsp;&nbsp;&nbsp;m[i] = i + 1; // Atribuim i + 1 la i.<br>
+            <br>
+			for(map&ltint,int&gt::iterator it = m.begin() ; it != m.end() ; ++it){<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;cout << it->first << ' ' << it->second << '\n';<br>
+            }<br>
+		</code>
+<h2 style="color: #a846b9;font-size: 16px;">2) Folosind cuvântul cheie "auto" care preia tipul de date automat :<br></h2>
+<code>for(auto it : m){<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;cout << it.first << ' ' << it.second << '\n';<br>
+    }<br>
+</code>
+
+<hr>
+
+<h1>Unordered_map în STL</h1>
+<ul>
+	
+    <li>În C++ Standard Template Library (STL), std::unordered_map este un container asociativ care, 
+        la fel ca std::map, stochează date sub formă de perechi cheie-valoare. 
+        Diferența majoră este că unordered_map nu menține o ordine între elemente. 
+        Acesta folosește o tabelă hash pentru a asocia cheile cu valorile, 
+        oferind astfel o performanță constantă O(1) pentru operațiile de acces, inserare și ștergere în majoritatea cazurilor.</li>
+    <li>Avem nevoie de librăria <code>&ltunordered_map&gt</code>.</li>
+    <li>Acesta se declară astfel : <code>unordered_map&lttip_data,tip_data&gt nume_map;</code></li>
+		
+</ul>
+
+<hr>
+<h2>Diferențe între map și unordered_map</h2>
+
+<ul>
+    <li>Funcțiile sunt identice.</li>
+    <li>Map menține elementele ordonate în funcție de cheie, în timp ce unordered_map nu menține nicio ordine.</li>
+    <li>Operațiile pe map au complexitate O(log n), 
+        în timp ce operațiile pe unordered_map au complexitate medie O(1), 
+        dar pot ajunge la O(n) în cazul coliziunilor frecvente în tabela hash.</li>
+    <li>Map este util atunci când ai nevoie de acces rapid la date într-o ordine specifică, 
+        iar unordered_map este preferat atunci când ordinea nu este importantă, dar viteza este esențială.</li>
+    <li>Nu putem utiliza perechile(pair) atât de ușor pe unordered_map.</li>
+
+</ul>
+
+<hr>
+
+<h2>Cum utilizăm pair cu unordered_map ?</h2>
+<code>struct hash_pair{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;template &ltclass T1, class T2&gt<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;size_t operator()(const pair<T1, T2> &p) const{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;auto hash1 = hash<T1>{}(p.fi);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;auto hash2 = hash<T2>{}(p.se);<br><br>
+ 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(hash1 != hash2)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return hash1 ^ hash2;<br><br>
+       
+                    &nbsp;&nbsp;&nbsp;&nbsp;return hash1;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+};<br>
+    unordered_map&ltpair&ltint,int&gt,int,hash_pair&gt nume_map_cu_pairs;</code><br>
+    ///Poate fi utilizata pentru a marca puncte de pe axa XoY spre exemplu
+
+<hr>
+
+<h1>Probleme în care se poate utiliza <code>&ltmap&gt</code> și <code>&ltunordered_map&gt</code></h1>
+<ul>
+	<style>
+		a{
+			display : inline-block;
+            font-size: 18px;
+            text-decoration: underline;
+            color: black;
+		}
+	</style>
+    <li><a href="https://www.pbinfo.ro/probleme/4267/perechipuncte" target="_blank">Perechi de puncte</a></li>
+	<li><a href="https://www.pbinfo.ro/probleme/2217/map" target="_blank">Map</a></li>
+	<li><a href="https://www.pbinfo.ro/probleme/4205/secvsums" target="_blank">SecvsumS</a></li>
+	<li><a href="https://www.pbinfo.ro/probleme/3798/nrminmaxap" target="_blank">nrminmaxap</a></li>
+    <li><a href="https://www.pbinfo.ro/probleme/2628/h2" target="_blank">H2</a></li>
+    <li><a href="https://www.pbinfo.ro/probleme/2631/h4" target="_blank">H4</a></li>
+    <li><a href="https://www.pbinfo.ro/probleme/3626/min-len-subseq" target="_blank">min-len-subseq</a></li>
+	<li><a href="https://www.pbinfo.ro/probleme/2225/complementar" target="_blank">complementar</a></li>
+    <li><a href="https://www.pbinfo.ro/probleme/3631/sum-unice" target="_blank">sum-unice</a></li>
+
+</ul>
+
+</div>
+
+<hr>
+
+<h2 style="font: 50px;">Materialul este încă in lucru. Pentru sugestii și greșeli observate verificați tab-ul de contact. </h2><br>
+
+{% endblock %}

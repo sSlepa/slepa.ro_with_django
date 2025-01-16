@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Master</title>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous" defer></script>
+
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto&display=swap" rel="stylesheet" />
+
+	<link rel="stylesheet" href="../../style.css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg bg-body-tertiary .bg-success">
+		<div class="container">
+			<a class="navbar-brand" href="../../main.html">slepa.ro</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse mx-2" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link" href="../../course.html"
+						  	title="course">Materiale</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="../../usefull_websites.html"
+						  	title="course">Usefull Websites</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="../../contact.html"
+						  	title="course" >Contact</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class = "content">
+	<h1 style="margin-top: 5px;">Grafuri</h1>
+
+<hr>
+
+<h1>Ce sunt grafurile ?</h1>
+
+<ul>
+<li>Grafurile sunt structuri de date foarte răspândite în ştiinţa calculatoarelor 
+	cu diferite aplicații practice în diverse domenii, cum ar fi analiza rețelelor, 
+	planificarea rutelor în transport, biologia computațională sau ingineria software. </li>
+<li>Un graf este o structură compusă dintr-un set de noduri (numite și vârfuri) și un set de muchii (sau arce) 
+	care conectează aceste noduri.</li>
+<li>Un mod de a declara un graf în C++ este : <code>vector&ltint> nume_graf[număr_noduri].</code></li>
+<li>Vom simula o listă de adiacență, ce este cu mult mai eficientă decât o matrice simplă 
+	(<code>int nume_graf[număr_noduri][număr_noduri]</code>), permițându-ne astfel să lucrăm cu un volum de date mai mare.</li>
+</ul>
+
+<hr>
+
+<h1>Tipuri de grafuri</h1>
+<ol>
+	<li><strong>Grafuri neorientate</strong>: În grafurile neorientate, muchiile nu au o direcție, 
+		adică dacă o muchie leagă nodurile x și y, aceasta poate fi traversată în ambele sensuri.</li>
+	
+	<li><strong>Grafuri orientate</strong>: În aceste grafuri, fiecare muchie are o direcție, 
+		deci există o relație de tipul (x, y), ceea ce înseamnă că muchia pornește din nodul x și se termină în nodul y. </li>
+	
+	<li><strong>Grafuri ponderate</strong>: Aceste grafuri au asociate valori numerice fiecărei muchii, 
+		numite ponderi. Grafurile ponderate sunt utile în probleme precum găsirea celui mai scurt drum.</li>
+	
+	<li><strong>Grafuri bipartite</strong>: Un graf este bipartit dacă mulțimea de noduri poate fi împărțită în două submulțimi, 
+		astfel încât muchiile să lege doar noduri din submulțimi diferite.</li>
+	
+	<li><strong>Grafuri complete</strong>: Într-un graf complet, fiecare pereche de noduri este conectată printr-o muchie. 
+	
+	<li><strong>Grafuri aciclice</strong>: Grafurile aciclice nu au cicluri, 
+		adică nu putem să ne reîntoarcem în nodul din care plecăm. Un exemplu ar fi DaG (directed acyclic graph).</li>
+  </ol>
+
+<hr>
+
+<h1>Citirea grafului.</h1>
+<code>
+	int x,y,n,m;<br>
+	vector&int> G[100005];<br>
+	int main(){<br>
+
+		&nbsp;&nbsp;&nbsp;&nbsp;cin >> n >> m;<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;for(int i = 0 ; i &lt m ; ++i){<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cin >> x >> y;<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G[x].push_back(y);<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G[y].push_back(x);<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+		<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;return 0;<br>
+	}<br>
+	
+</code>
+
+<hr>
+
+<h1>DFS - Parcurgere în adâncime</h1>
+<ul>
+<li>DFS este o tehnică, de obicei implementată recursiv, ce continua parcurgerea grafului în adâncime până în momentul 
+	în care sunt marcate toate nodurile. </li>
+<li>Operațiunea este reluată de fiecare dată când algoritmul revine din recursivitate, până marcăm toate nodurile posibile.</li>
+<li>O implementare : 
+	<code>
+		///Presupunem că avem graful citit. <br>
+		vector&ltint> G[100005];<br>
+		int vizitat[100005];<br>
+		void dfs(int nod){<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;vizitat[nod] = 1; <code style="color: gray;">/// Marcăm ca vizitat pentru a nu intra in infinite loop</code><br>
+			&nbsp;&nbsp;&nbsp;&nbsp;for(auto i : G[nod]){ ///<code style="color: gray;">Iterăm prin nodurile cu care este legat NOD</code><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(vizitat[i] == 0)<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dfs(i);<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+		}<br>
+
+	</code></li>
+</ul>
+
+<hr>
+
+<h1>BFS - Parcurgere în lățime</h1>
+<ul>
+	<li>BFS este o tehnică, de obicei implementată cu un <b>Queue</b>, 
+		ce vizitează toți vecinii nodului curent adaugându-i în coadă pe toți.</li>
+	<li>Operațiunea se oprește când coada rămâne goală.</li>
+	<li>O implementare : 
+		<code>
+			///Presupunem că avem graful citit. <br>
+			vector&ltint> G[100005];<br>
+			int vizitat[100005];<br>
+			void bfs(int nod){<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;vizitat[nod] = 1; 
+				<code style="color: gray;">/// Marcăm ca vizitat pentru a nu intra in infinite loop</code><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;queue&ltint> q;<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;q.push(nod);<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;while(!q.empty()){<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int x = q.front();<code style="color: gray;">///Extragem nodul curent din coada</code><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q.pop();<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(auto i : G[x]) <code style="color: gray;">///Iterăm prin nodurile cu care este legat X</code><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(vizitat[i] == 0){<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vizitat[i] = 1;<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q.push(i);<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+			}<br>
+	
+		</code></li>
+
+</ul>
+
+</div>
+
+<hr>
+
+<h2 style="font: 50px;">Materialul este încă in lucru. Pentru sugestii și greșeli observate verificați tab-ul de contact. </h2><br>
+
+</body>
+
+</html>
