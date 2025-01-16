@@ -48,6 +48,12 @@ urlpatterns = [
     path("articles/sda/heap/", views.heap_page, name="heap_page"),
     path("articles/sda/red_black/", views.red_black_page, name="red_black_page"),
     path("articles/sda/splay/", views.splay_page, name="splay_page"),
-    path("articles/sda/trie/", views.trie_page, name="trie_page")
+    path("articles/sda/trie/", views.trie_page, name="trie_page"),
+
+    # Missing
+
+    path("articles/dp/", views.dinamic_page, name="dinamic_page"),
+    path("articles/oop/", views.oop_page, name="oop_page"),
+    path("articles/diverse/", views.diverse_page, name="diverse_page")
 
 ]

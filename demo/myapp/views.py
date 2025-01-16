@@ -103,3 +103,14 @@ def splay_page(request):
 def trie_page(request):
     return render(request, "articles/sda/trie.html")
 
+# Missing
+
+def oop_page(request):
+    return render(request, "articles/oop.html")
+
+def dinamic_page(request):
+    return render(request, "articles/dp.html")
+
+def diverse_page(request):
+    return render(request, "articles/diverse.html")
+
